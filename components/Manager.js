@@ -35,7 +35,7 @@ const Manager = () => {
     const { toast } = useToast()
 
     const getData = async () => {
-      let document = await axios.get("http://localhost:3000/api/users");
+      let document = await axios.get("https://pass-manager-next-js.vercel.app/api/users");
       let dbData = (document.data)
       setMyData(dbData)
     }
@@ -77,7 +77,7 @@ const Manager = () => {
           password: inputPassRef.current.value,
         }
         setMyData([...myData,myNewData])
-        axios.post("http://localhost:3000/api/users",myNewData);
+        axios.post("https://pass-manager-next-js.vercel.app/api/users",myNewData);
 
         const getDetails = dateGenerator();
         toast({
@@ -101,7 +101,7 @@ const Manager = () => {
       if(c){
         let updatedData = myData.filter((item) => item.id !== id);
         let deletedData = myData.filter((item) => item.id === id)[0];
-        let res = await fetch("http://localhost:3000/api/users",{
+        let res = await fetch("https://pass-manager-next-js.vercel.app/api/users",{
           method: "DELETE",
           headers: {"Content-type": "application/json"},
           body: JSON.stringify({
