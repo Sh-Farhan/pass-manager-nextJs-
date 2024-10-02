@@ -22,17 +22,27 @@ import {
 import { ToastAction } from "@/components/ui/toast"
 import { useToast } from "@/hooks/use-toast"
 
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useState } from "react";
-import { toggleVariants } from "./toggle";
-import { TableDemo } from "../PassTable";
-import { AlertDemo } from "../AlertBox";
+import { toggleVariants } from "./ui/toggle";
+import { TableDemo } from "./PassTable";
+import axios from "axios";
 
 const Manager = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [myData,setMyData] = useState([]);
     const[toggle,setToggle] = useState(false)
     const { toast } = useToast()
+
+    const getData = async () => {
+      let document = await axios.get("http://localhost:3000/api/users");
+      let dbData = (document.data)
+      setMyData(dbData)
+    }
+
+    useEffect(()=>{
+      getData();
+    },[])
 
     const inputSiteRef = useRef(null);
     const inputUserRef = useRef(null);
@@ -45,34 +55,42 @@ const Manager = () => {
       console.log(inputPassRef.current.type)
     };
 
+    const dateGenerator = () => {
+      const now = new Date();
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const day = daysOfWeek[now.getDay()]; // returns a number representing the day of the week, starting with 0 for Sunday
+      const hours = now.getHours();
+      const minutes = now.getMinutes()
+      const month = now.getMonth() + 1; // Month is zero-based
+      const year = now.getFullYear();
+      const formattedDate = `${now.getDate()}/${month}/${year}`; 
+
+      return [day,formattedDate,hours,minutes]
+    }
+
     const submitData = () => {
       if(inputSiteRef.current.value && inputUserRef.current.value && inputPassRef.current.value){
-        setMyData([...myData,{
-            id: uuidv4(),
-            site: inputSiteRef.current.value,
-            username: inputUserRef.current.value,
-            password: inputPassRef.current.value,
-        }])
-        const now = new Date();
-        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        const day = daysOfWeek[now.getDay()]; // returns a number representing the day of the week, starting with 0 for Sunday
-        const hours = now.getHours();
-        const minutes = now.getMinutes()
-        const month = now.getMonth() + 1; // Month is zero-based
-        const year = now.getFullYear();
-        const formattedDate = `${now.getDate()}/${month}/${year}`; 
+        let myNewData = {
+          id: uuidv4(),
+          site: inputSiteRef.current.value,
+          username: inputUserRef.current.value,
+          password: inputPassRef.current.value,
+        }
+        setMyData([...myData,myNewData])
+        axios.post("http://localhost:3000/api/users",myNewData);
+
+        const getDetails = dateGenerator();
         toast({
           title: "Action: Password added",
-          // description: "Friday, February 10, 2023 at 5:57 PM",
-          description: `${day}, ${formattedDate} at  ${hours}:${minutes}`,
+          description: `${getDetails[0]}, ${getDetails[1]} at  ${getDetails[2]}:${getDetails[3]}`,
           action: (
-            <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+            <ToastAction altText="Goto schedule to undo">Back</ToastAction>
           ),
         }
       )
-inputSiteRef.current.value = null
-inputUserRef.current.value = null
-inputPassRef.current.value = null
+        inputSiteRef.current.value = null
+        inputUserRef.current.value = null
+        inputPassRef.current.value = null
      }
         else alert("Enter all the details")
 

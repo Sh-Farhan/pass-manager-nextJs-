@@ -19,7 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import Manager from "@/components/ui/Manager";
+import Manager from "@/components/Manager";
 
 export default function Home() {
   return (
