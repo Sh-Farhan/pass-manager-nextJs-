@@ -40,12 +40,12 @@ export const POST = async (req,res) => {
 export const DELETE = async(req,res) => {
     try{
         const data = await req.json();
+        console.log(data);
         await client.connect();
         const db = client.db(dbName);
         const collection = db.collection('userData');
         const Result = await collection.deleteOne(data);
-        // return new NextResponse.json({succes : true, result: Result,myDel: data})
-        return new NextResponse(JSON.stringify({succes : true, result: Result,myDel: data}))
+        return NextResponse.json({succes : true, result: Result,myDel: data})
     } catch(error){
         return new NextResponse("Error inserting data: " + error.message);
     } finally{

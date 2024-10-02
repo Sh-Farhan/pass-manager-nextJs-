@@ -96,9 +96,24 @@ const Manager = () => {
 
     }
 
-    const handleDelete = (id) => {
-      let newData = myData.filter((item) => item.id !== id);
-      setMyData(newData)
+    const handleDelete = async (id) => {
+      let c = confirm("Do you really want to delete this password");
+      if(c){
+        let updatedData = myData.filter((item) => item.id !== id);
+        let deletedData = myData.filter((item) => item.id === id)[0];
+        let res = await fetch("http://localhost:3000/api/users",{
+          method: "DELETE",
+          headers: {"Content-type": "application/json"},
+          body: JSON.stringify({
+            site: deletedData.site,
+            username: deletedData.username,
+            password: deletedData.password
+          })
+        })
+        console.log(res)
+        setMyData(updatedData)
+      }
+
     }
 
   return (
