@@ -34,14 +34,14 @@ const Manager = () => {
     const[toggle,setToggle] = useState(false)
     const { toast } = useToast()
 
-    const getData = async () => {
-      let document = await axios.get("https://pass-manager-next-js.vercel.app/api/users");
-      let dbData = (document.data)
-      setMyData(dbData)
-    }
+    // const getData = async () => {
+    //   let document = await axios.get("https://pass-manager-next-js.vercel.app/api/users");
+    //   let dbData = (document.data)
+    //   setMyData(dbData)
+    // }
 
     useEffect(()=>{
-      getData();
+      // getData();
     },[])
 
     const inputSiteRef = useRef(null);
