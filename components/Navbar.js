@@ -10,15 +10,12 @@ const Navbar = () => {
     <nav className='bg-white text-black min-w-full'>
         <div className='flex flex-row justify-between'>
         <div className="text-2xl font-semibold items-center">
-            <span>&lt;</span>
-            Pass.io
-            <span>/&gt;</span>
+            complain.io
         </div>
         <div className='flex flex-row gap-10 items-center'>
-            <ul className='flex flex-row gap-5 mr-5 text-xl font-semibold'>
+            <ul className='flex flex-row justify-between gap-5 mr-5 text-xl font-semibold'>
                 <li><a>Home</a></li>
                 <li><a>About us</a></li>
-                <li><a>Docs</a></li>
             </ul>
     <Avatar>
       <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

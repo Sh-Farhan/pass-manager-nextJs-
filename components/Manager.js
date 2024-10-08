@@ -28,18 +28,13 @@ import { toggleVariants } from "./ui/toggle";
 import { TableDemo } from "./PassTable";
 import axios from "axios";
 import { Textarea } from "@/components/ui/textarea"
+import { addRequestMeta } from "next/dist/server/request-meta";
 
 const Manager = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [myData,setMyData] = useState([]);
     const[toggle,setToggle] = useState(false)
     const { toast } = useToast()
-
-    // const getData = async () => {
-    //   let document = await axios.get("https://pass-manager-next-js.vercel.app/api/users");
-    //   let dbData = (document.data)
-    //   setMyData(dbData)
-    // }
 
     useEffect(()=>{
       // getData();
@@ -49,11 +44,12 @@ const Manager = () => {
     const inputUserRef = useRef(null);
     const inputPassRef = useRef(null);
     const toggleRef = useRef(null)
+    const complainRef = useRef(null);
 
     const togglePasswordVisibility = () => {
       setToggle((prevState) => !prevState);
       setShowPassword((prevState) => !prevState);
-      console.log(inputPassRef.current.type)
+      // console.log(inputPassRef.current.type)
     };
 
     const dateGenerator = () => {
@@ -73,9 +69,10 @@ const Manager = () => {
       if(inputSiteRef.current.value && inputUserRef.current.value && inputPassRef.current.value){
         let myNewData = {
           id: uuidv4(),
-          site: inputSiteRef.current.value,
+          email: inputSiteRef.current.value,
           username: inputUserRef.current.value,
-          password: inputPassRef.current.value,
+          address: inputPassRef.current.value,
+          isResolved: false
         }
         setMyData([...myData,myNewData])
         axios.post("https://pass-manager-next-js.vercel.app/api/users",myNewData);
@@ -135,8 +132,8 @@ const Manager = () => {
         <form>
           <div className="grid items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="site">Site</Label>
-              <Input ref={inputSiteRef} id="site" placeholder="Name of your site" />
+              <Label htmlFor="site">Email</Label>
+              <Input ref={inputSiteRef} type="email" id="site" placeholder="Name of your site" />
             </div>
 
             <div className="flex flex-row justify-between">
@@ -145,14 +142,14 @@ const Manager = () => {
               <Input ref={inputUserRef} id="username" placeholder="Name of your user" />
             </div>
             <div className="flex flex-col w-1/2 space-y-1.5 relative">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Address</Label>
               <Input ref={inputPassRef} id="password" type={toggle ? "text" : "password"} placeholder="Enter your password" />
     <span ref={toggleRef} onClick={togglePasswordVisibility} className="absolute top-[55%] right-2 transform -translate-y-1/2 flex items-center cursor-pointer">
       {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
     </span>
             </div>
             </div>
-            <Textarea placeholder="Type your message here." />
+            <Textarea ref={complainRef} placeholder="Type your query here..." />
           </div>
         </form>
       </CardContent>
