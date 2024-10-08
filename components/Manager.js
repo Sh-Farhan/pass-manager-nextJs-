@@ -27,6 +27,7 @@ import { useState } from "react";
 import { toggleVariants } from "./ui/toggle";
 import { TableDemo } from "./PassTable";
 import axios from "axios";
+import { Textarea } from "@/components/ui/textarea"
 
 const Manager = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -151,6 +152,7 @@ const Manager = () => {
     </span>
             </div>
             </div>
+            <Textarea placeholder="Type your message here." />
           </div>
         </form>
       </CardContent>
