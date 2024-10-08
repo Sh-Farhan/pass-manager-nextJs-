@@ -6,13 +6,13 @@ export const dynamic = 'force-static'
 const url =  process.env.MONGO_URI;
 const client = new MongoClient(url)
 
-const dbName = 'pass-manager-user-db'
+const dbName = 'dbComplains'
 
 export const GET = async () => {
     try{
         await client.connect();
         const db = client.db(dbName);
-        const collection = db.collection('userData');
+        const collection = db.collection('userComplains');
         const Result = await collection.find({}).toArray();
         const data = await JSON.stringify(Result)
         return new NextResponse(data)
