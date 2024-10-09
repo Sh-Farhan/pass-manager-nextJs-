@@ -21,28 +21,28 @@ import {
 export const description = "A multiple bar chart"
 
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { month: "January", Registered: 186, Solved: 80 },
+  { month: "February", Registered: 305, Solved: 200 },
+  { month: "March", Registered: 237, Solved: 120 },
+  { month: "April", Registered: 73, Solved: 190 },
+  { month: "May", Registered: 209, Solved: 130 },
+  { month: "June", Registered: 214, Solved: 140 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  Registered: {
+    label: "Registered",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
-    label: "Mobile",
+  Solved: {
+    label: "Solved",
     color: "hsl(var(--chart-2))",
   },
 }
 
 export function DataChart() {
   return (
-    <Card className="max-w-lg">
+    <Card className="w-1/2">
       <CardHeader>
         <CardTitle>Bar Chart - Multiple</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
@@ -62,14 +62,14 @@ export function DataChart() {
               cursor={false}
               content={<ChartTooltipContent indicator="dashed" />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+            <Bar dataKey="Registered" fill="var(--color-Registered)" radius={4} />
+            <Bar dataKey="Solved" fill="var(--color-Solved)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          Solved up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
           Showing total visitors for the last 6 months

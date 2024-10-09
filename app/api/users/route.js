@@ -12,7 +12,7 @@ export const GET = async () => {
     try{
         await client.connect();
         const db = client.db(dbName);
-        const collection = db.collection('userComplains');
+        const collection = db.collection('userData');
         const Result = await collection.find({}).toArray();
         const data = await JSON.stringify(Result)
         return new NextResponse(data)

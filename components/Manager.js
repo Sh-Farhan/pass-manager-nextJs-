@@ -43,7 +43,7 @@ const Manager = () => {
     },[])
 
     const inputEmailRef = useRef(null);
-    const inputUserRef = useRef(null);
+    const inputAadharRef = useRef(null);
     const inputAddressRef = useRef(null);
     const toggleRef = useRef(null)
     const inputComplainRef = useRef(null);
@@ -68,11 +68,11 @@ const Manager = () => {
     }
 
     const submitData = () => {
-      if(inputEmailRef.current.value && inputUserRef.current.value && inputAddressRef.current.value){
+      if(inputEmailRef.current.value && inputAadharRef.current.value && inputAddressRef.current.value){
         let myNewData = {
           id: uuidv4(),
           email: inputEmailRef.current.value,
-          username: inputUserRef.current.value,
+          aadhar: inputAadharRef.current.value,
           address: inputAddressRef.current.value,
           complain: inputComplainRef.current.value,
           isResolved: false
@@ -91,7 +91,7 @@ const Manager = () => {
         }
       )
         inputEmailRef.current.value = null
-        inputUserRef.current.value = null
+        inputAadharRef.current.value = null
         inputAddressRef.current.value = null
      }
         else alert("Enter all the details")
@@ -137,8 +137,8 @@ const Manager = () => {
 
             <div className="flex flex-row justify-between">
             <div className="flex flex-col w-1/3 space-y-1.5">
-              <Label htmlFor="username">Username</Label>
-              <Input ref={inputUserRef} id="username" placeholder="Name of your user" />
+              <Label htmlFor="aadhar">Aadhar</Label>
+              <Input ref={inputAadharRef} id="username" placeholder="Name of your user" />
             </div>
             <div className="flex flex-col w-1/2 space-y-1.5 relative">
               <Label htmlFor="password">Address</Label>

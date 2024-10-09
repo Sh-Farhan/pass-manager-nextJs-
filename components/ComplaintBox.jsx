@@ -4,15 +4,28 @@ import React, { useState } from 'react'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import axios from 'axios'
+import { useEffect } from 'react';
 
 export default function ComplaintBox() {
-  const [complaints] = useState([
+  const [complaints,setComplaints] = useState([
     { id: 1, name: "John Doe", subject: "Faulty Product", description: "The product I received was damaged." },
     { id: 2, name: "Jane Smith", subject: "Late Delivery", description: "My order arrived 3 days late." },
     { id: 3, name: "Mike Johnson", subject: "Poor Customer Service", description: "The representative was unhelpful and rude." },
     { id: 4, name: "Emily Brown", subject: "Billing Issue", description: "I was charged twice for my last purchase." },
     { id: 5, name: "Chris Lee", subject: "Website Malfunction", description: "I couldn't complete my order due to a website error." },
   ])
+
+  const getData = async () => {
+    const details = await axios.get("http://localhost:3000/api/users");
+    const dbData = await details.data;
+    // setComplaints([...comp,dbData])
+    console.log(dbData)
+  }
+
+  useEffect(() => {
+    getData();
+  })
 
   return (
     <Card className="w-full max-w-2xl mx-auto">

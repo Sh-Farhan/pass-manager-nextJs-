@@ -49,9 +49,8 @@ export default function Navbar() {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'Show Complaints', href: '/file-complaint' },
-    // { name: 'Track Complaint', href: '/track-complaint' },
-    { name: 'FAQs', href: '/faqs' },
+    { name: 'Show Complaints', href: '/ShowComplain' },
+    { name: 'FAQs', href: 'https://guidelines.india.gov.in/frequently-asked-questions/' },
     { name: 'Contact', href: '/contact' },
   ]
 
@@ -60,7 +59,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0">
+            <Link target="_blank" href="https://www.india.gov.in/" className="flex-shrink-0">
               <img className="h-8 w-8" src="https://as2.ftcdn.net/v2/jpg/02/29/51/37/1000_F_229513787_8XjaId5E9g3DYxHNialX7xUr0pppLXLJ.jpg" alt="Government Logo" />
             </Link>
             <div className="hidden md:block">
