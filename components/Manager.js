@@ -31,6 +31,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { addRequestMeta } from "next/dist/server/request-meta";
 import { DataChart } from "./MyChart";
 import ComplaintBox from "./ComplaintBox";
+import ComplainForm from "./ComplaintForm";
 
 const Manager = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -123,39 +124,7 @@ const Manager = () => {
      <div>
      </div>
     <div className="container mt-7 mx-auto flex justify-center items-center">
-    <Card className="min-w-full bg-transparent">
-      <CardHeader>
-        <CardTitle>Enter the following details...</CardTitle> 
-      </CardHeader>
-      <CardContent>
-        <form>
-          <div className="grid items-center gap-4">
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="site">Email</Label>
-              <Input ref={inputEmailRef} type="email" id="site" placeholder="Name of your site" />
-            </div>
-
-            <div className="flex flex-row justify-between">
-            <div className="flex flex-col w-1/3 space-y-1.5">
-              <Label htmlFor="aadhar">Aadhar</Label>
-              <Input ref={inputAadharRef} id="username" placeholder="Name of your user" />
-            </div>
-            <div className="flex flex-col w-1/2 space-y-1.5 relative">
-              <Label htmlFor="password">Address</Label>
-              <Input ref={inputAddressRef} id="password" type={toggle ? "text" : "password"} placeholder="Enter your password" />
-    <span ref={toggleRef} onClick={togglePasswordVisibility} className="absolute top-[55%] right-2 transform -translate-y-1/2 flex items-center cursor-pointer">
-      {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-    </span>
-            </div>
-            </div>
-            <Textarea ref={inputComplainRef} placeholder="Type your query here..." />
-          </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-center">
-        <Button className="w-full mt-1.5" onClick={() => submitData()}>Submit</Button>
-      </CardFooter>
-    </Card>   
+    <ComplainForm></ComplainForm>
     </div>
     <ComplaintBox></ComplaintBox>
     </div>

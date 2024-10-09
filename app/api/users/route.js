@@ -22,7 +22,7 @@ export const GET = async () => {
 
 }
 
-export const POST = async (req,res) => {
+export const POST = async (req) => {
     try {
         const data = await req.json();
         await client.connect();
