@@ -119,16 +119,30 @@ const Manager = () => {
 
     }
 
+  // return (
+  //   <div className="mt-5 flex gap-6">
+  //    {/* <div>
+
+  //    </div> */}
+  //   <div className="container mt-7 mx-auto flex justify-center items-center">
+  //   <ComplainForm></ComplainForm>
+  //   </div>
+  //   <ComplaintBox></ComplaintBox>
+  //   </div>
+  // )
   return (
-    <div className="mt-5 flex gap-6">
-     <div>
-     </div>
-    <div className="container mt-7 mx-auto flex justify-center items-center">
-    <ComplainForm></ComplainForm>
-    </div>
-    <ComplaintBox></ComplaintBox>
+    <div className="mt-5 flex flex-col lg:flex-row gap-6">
+      <div className="container mt-7 mx-auto flex flex-col lg:flex-row justify-center items-center gap-6">
+        <div className="w-full lg:w-1/2">
+          <ComplainForm />
+        </div>
+        <div className="w-full lg:w-1/2">
+          <ComplaintBox />
+        </div>
+      </div>
     </div>
   )
+  
 }
 
 export default Manager
